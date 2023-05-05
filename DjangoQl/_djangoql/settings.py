@@ -34,6 +34,9 @@ INSTALLED_APPS = [
     # local apps
     'firstApp',
 
+    # third party apps
+    'graphene_django',
+
     # builtin applications
     'django.contrib.admin',
     'django.contrib.auth',
@@ -103,6 +106,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+GRAPHENE = {
+    "SCHEMA": "graphql_tutorial.schema.schema"
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
