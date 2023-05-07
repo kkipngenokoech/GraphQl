@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'restaurant',
 
     # third party apps
-    'graphene-django',
+    'graphene_django',
 
     # built in applications
     'django.contrib.admin',
