@@ -31,6 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # local apps
+    'restaurant',
+
+    # third party apps
+    'graphene-django',
+
+    # built in applications
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
