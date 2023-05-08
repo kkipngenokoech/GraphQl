@@ -53,4 +53,7 @@ read_contact = graphene.Field(ContactType, id = graphene.Int())
 
 ### create
 
-to create a new data 
+to create a new data into the database, we are going to need to introduce a new class mutation, instead of QUery
+
+class mutation is used to create/ modify data in the database.
+

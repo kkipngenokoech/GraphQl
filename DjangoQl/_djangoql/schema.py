@@ -19,5 +19,26 @@ class Query(graphene.ObjectType):
     
     def resolve_read_contact(root, info, id):
         return Contact.objects.get(id=id)
+    
+class ContactMutation(graphene.Mutation):
+    class Arguments:
+        name = graphene.String()
+        phoneNumber = graphene.String()
+    contact = graphene.Field(ContactType)
 
-schema = graphene.Schema(query=Query)
+    @classmethod
+    def mutate(cls, root, info, name, phoneNumber):
+        contact = Contact(name=name, phoneNumber=phoneNumber)
+        contact.save()
+
+        # get_contact = Contact.objects.get(id=id)
+        # get_contact.name = name
+        # get_contact.phoneNumber = phoneNumber
+        # get_contact.save()
+        # return ContactMutation(contact=get_contact)
+    
+class Mutation(graphene.ObjectType):
+    create_contact = ContactMutation.Field()
+    # update_contact = ContactMutation.Field()
+
+schema = graphene.Schema(query=Query, mutation=Mutation)
