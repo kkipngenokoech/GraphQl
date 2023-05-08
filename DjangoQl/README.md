@@ -57,3 +57,7 @@ to create a new data into the database, we are going to need to introduce a new 
 
 class mutation is used to create/ modify data in the database.
 
+## Delete
+
+here we are going to delete data related to a particular id and then use delete() function to delete it
+

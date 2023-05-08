@@ -22,23 +22,39 @@ class Query(graphene.ObjectType):
     
 class ContactMutation(graphene.Mutation):
     class Arguments:
+        id = graphene.ID()
         name = graphene.String()
         phoneNumber = graphene.String()
     contact = graphene.Field(ContactType)
 
     @classmethod
-    def mutate(cls, root, info, name, phoneNumber):
+    def mutate(cls, root, info, name, phoneNumber, id):
+         ###########Create##############
         contact = Contact(name=name, phoneNumber=phoneNumber)
-        contact.save()
+        contact.save()  
 
-        # get_contact = Contact.objects.get(id=id)
-        # get_contact.name = name
-        # get_contact.phoneNumber = phoneNumber
-        # get_contact.save()
-        # return ContactMutation(contact=get_contact)
+         ###########Update##############
+        get_contact = Contact.objects.get(id=id)
+        get_contact.name = name
+        get_contact.phoneNumber = phoneNumber
+        get_contact.save()
+        return ContactMutation(contact=get_contact)
     
+
+
+class ContactDelete(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID()
+    contact = graphene.Field(ContactType)
+
+    @classmethod
+    def mutate(cls, root, info, id):
+        contact = Contact(id=id)
+        contact.delete()
+
 class Mutation(graphene.ObjectType):
     create_contact = ContactMutation.Field()
-    # update_contact = ContactMutation.Field()
+    update_contact = ContactMutation.Field()
+    delete_contact = ContactDelete.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
