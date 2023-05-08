@@ -11,9 +11,13 @@ class ContactType(DjangoObjectType):
 class Query(graphene.ObjectType):
     #query ContactType to get list of contacts
     list_contact=graphene.List(ContactType)
+    read_contact=graphene.Field(ContactType, id=graphene.Int())
 
     def resolve_list_contact(root, info):
         # We can easily optimize query count in the resolve method
         return Contact.objects.all()
+    
+    def resolve_read_contact(root, info, id):
+        return Contact.objects.get(id=id)
 
 schema = graphene.Schema(query=Query)
